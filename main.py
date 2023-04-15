@@ -8,6 +8,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report, roc_curve, roc_auc_score
+
 
 
 def train_nn(n_layers, n_nodes, activation, optimizer, learning_rate):
@@ -21,7 +23,7 @@ def train_nn(n_layers, n_nodes, activation, optimizer, learning_rate):
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
 
-    history = model.fit(X_scaled, y_encoded, epochs=20, validation_split=0.2, batch_size=128)
+    history = model.fit(X_scaled, y_encoded, epochs=4, validation_split=0.2, batch_size=128)
 
     return history
 
@@ -89,3 +91,9 @@ plt.ylabel('Metric')
 plt.title('Training Curves')
 plt.legend()
 plt.show()
+
+lr_report = classification_report(y_test, lr_predictions)
+dt_report = classification_report(y_test, dt_predictions)
+
+print(lr_report, dt_report)
+
