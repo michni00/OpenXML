@@ -8,7 +8,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-from sklearn.metrics import classification_report, roc_curve, roc_auc_score
+from sklearn.metrics import classification_report
+
 
 
 
@@ -33,6 +34,10 @@ X = df.iloc[:,:-1]
 y = df.iloc[:,-1]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+median_elevation = np.median(df[0])
+
+df["Cover_Type"] = np.where(df[0] > median_elevation, 1, 2)
 
 lr_model = LogisticRegression()
 lr_model.fit(X_train, y_train)
