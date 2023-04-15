@@ -83,7 +83,7 @@ def train_nn(n_layers, n_nodes, activation, optimizer, learning_rate, X_scaled, 
     model.compile(optimizer=optimizer(learning_rate=learning_rate),
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
-    history = model.fit(X_scaled, y_encoded, epochs=4, validation_split=0.2, batch_size=128)
+    history = model.fit(X_scaled, y_encoded, epochs=50, validation_split=0.2, batch_size=128)
     return history
 
 
